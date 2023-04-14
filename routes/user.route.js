@@ -1,6 +1,7 @@
 const express=require('express');
 const bcrypt=require('bcrypt');
 const jwt=require("jsonwebtoken");
+require('dotenv').config();
 const { userModel } = require('../models/user.model');
 
 const userRouter=express.Router();
@@ -40,7 +41,7 @@ userRouter.post("/login", async(req,res)=>{
         if(user.length>0){
             bcrypt.compare(password, user[0].password, async(err, result)=>{
                 if(result){
-                    const token=jwt.sign({email:user[0].email}, "kanban", {expiresIn:"1h"});
+                    const token=jwt.sign({UserId: user._id}, process.env.secret , {expiresIn:"1h"});
                     res.status(200).send({"msg":"login successful", "token":token, "user":user})
                 }else{
                     res.status(400).send({"msg":"Incorrect password or email address"})
