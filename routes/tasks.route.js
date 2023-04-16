@@ -42,6 +42,7 @@ TaskRouter.post('/boards/:boardId/tasks', async (req, res) => {
       const board = await boardModel.findByIdAndUpdate(boardId, { $push: { tasks: savedTask._id } }, { new: true });
   
       console.log('Task created:', savedTask);
+      console.log('Board created:', board);
 
       res.send(board);
     } catch (err) {
