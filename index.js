@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRouter);
-app.use(Authentication);
+// app.use(Authentication);
 app.use("/api", TaskRouter)
 
 app.listen(process.env.port, async()=>{

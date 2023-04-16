@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema({
         enum: ['Todo', 'Doing', 'Done'],
         default: 'Todo'
     },
-    subtask: [{
+    subtasks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subtask'
     }]
@@ -24,7 +24,7 @@ const taskSchema = new mongoose.Schema({
 
 const subtaskSchema = new mongoose.Schema({
     title: String,
-    isCompleted: Boolean
+    isCompleted: { type: Boolean, default: false }
 })
 
 const boardModel = mongoose.model("board", boardSchema);
